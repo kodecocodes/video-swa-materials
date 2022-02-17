@@ -1,4 +1,4 @@
-/// Copyright (c) 2020 Razeware LLC
+/// Copyright (c) 2022 Razeware LLC
 ///
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -17,6 +17,10 @@
 /// or information technology.  Permission for such use, copying, modification,
 /// merger, publication, distribution, sublicensing, creation of derivative works,
 /// or sale is expressly withheld.
+///
+/// This project and source code may use libraries or frameworks that are
+/// released under various Open-Source licenses. Use of those libraries and
+/// frameworks are governed by their own individual licenses.
 ///
 /// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 /// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
@@ -54,7 +58,10 @@ struct ContentView : View {
           x: zoomed ? 500 : 30,
           y: -30
         )
-        .animation(.default)
+        // MARK: - Update deprecated `animation` modifier
+        //        .animation(.default)
+        // Animate when `zoomed` changes
+        .animation(.default, value: zoomed)
 
         GeometryReader { geometry in
           Image("thumb")
@@ -65,8 +72,8 @@ struct ContentView : View {
               Circle()
                 .fill(
                   zoomed
-                    ? Color.clear
-                    : Color(white: 1, opacity: 0.4)
+                  ? Color.clear
+                  : Color(white: 1, opacity: 0.4)
                 )
                 .scaleEffect(0.8)
             )
@@ -77,7 +84,10 @@ struct ContentView : View {
             )
             .scaleEffect((zoomed ? 4 : 1) / 3)
             .shadow(radius: 10)
-            .animation(.spring())
+          // MARK: - Update deprecated `animation` modifier
+          //        .animation(.spring())
+          // Animate when `zoomed` changes
+            .animation(.spring(), value: zoomed)
             .onTapGesture { zoomed.toggle() }
         }
       }
