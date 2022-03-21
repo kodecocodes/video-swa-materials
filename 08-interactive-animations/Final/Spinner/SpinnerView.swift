@@ -52,8 +52,8 @@ struct SpinnerView: View {
       // MARK: - Update deprecated `animation` modifier
       //        .animation(.easeIn(duration: 1.5))
       // Animate when `isCurrent` or `isCompleting` change
-        .animation(.easeInOut(duration: 1.5), value: isCurrent)
         .animation(.easeInOut(duration: 1.5), value: isCompleting)
+        .animation(.easeInOut(duration: 1.5), value: isCurrent)
     }
   }
 
@@ -110,7 +110,9 @@ struct SpinnerView: View {
     completed = true
     currentIndex = -1
     DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2)) {
-      isVisible = false
+      withAnimation {
+        isVisible = false
+      }
     }
   }
   

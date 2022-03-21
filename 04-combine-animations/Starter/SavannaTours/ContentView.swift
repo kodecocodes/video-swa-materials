@@ -56,6 +56,7 @@ struct ContentView : View {
           x: 30,
           y: -30
         )
+        .animation(.default)
 
         GeometryReader { geometry in
           Image("thumb")
